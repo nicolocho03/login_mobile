@@ -56,9 +56,18 @@ class LoginActivity : AppCompatActivity() {
 
                     Toast.makeText(
                         this@LoginActivity,
-                        "Bienvenido ${loginResponse?.user?.name ?: ""}",
+                        "Login exitoso",
                         Toast.LENGTH_SHORT
                     ).show()
+
+                    // Navegar a HomeActivity
+                    val intent = Intent(this@LoginActivity, HomeActivity::class.java).apply {
+                        putExtra("USER_NAME", loginResponse?.user?.name)
+                        putExtra("USER_EMAIL", loginResponse?.user?.email)
+                        putExtra("TOKEN", loginResponse?.token)
+                    }
+                    startActivity(intent)
+                    finish()
 
                 } else {
                     Toast.makeText(
@@ -79,4 +88,4 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-}
+
